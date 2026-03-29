@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    // Initialisiere den TextEditingController für die Suchleiste
     _searchController = TextEditingController();
   }
 
@@ -116,7 +117,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     return ListTile(
                       title: Text('${patient.vorname} ${patient.name}'),
                       subtitle: Text('ID: ${patient.versichertennummer}'),
-                      trailing: Text(patient.geburtsdatum.toString().split(' ')[0]),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Behandlungskarte action
+                            },
+                            child: const Text('Behandlung'),
+                          ),
+                          const SizedBox(width: 8),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Stammdaten action
+                            },
+                            child: const Text('Stammdaten'),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 );
