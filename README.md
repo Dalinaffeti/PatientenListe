@@ -14,36 +14,36 @@ Ziel ist es, eine übersichtliche und durchsuchbare Liste von Patienten bereitzu
   Versicherungsnummer
 
 # Verwendete Technologien
--Flutter (Dart)
+- Flutter (Dart)
 
--Provider (State Management)
+- Provider (State Management)
 
--Faker (Mockdaten-Generierung)
+- Faker (Mockdaten-Generierung)
 
--Visual Studio Code
+- Visual Studio Code
 
 # Architektur
 
 Die Anwendung ist modular aufgebaut:
 
--Models: Datenstruktur (Patient).
+- Models: Datenstruktur (Patient).
 
--Services: Generierung der Mockdaten.
+- Services: Generierung der Mockdaten.
 
--Provider: State Management und Suchlogik.
+- Provider: State Management und Suchlogik.
 
--Widgets: Wiederverwendbare Komponenten.
+- Widgets: Wiederverwendbare Komponenten.
 
 # Installation & Start
--Repository klonen:
+- Repository klonen:
   git clone https://github.com/Dalinaffeti/PatientenListe.git
   
--Projekt öffnen:
+- Projekt öffnen:
   cd patient_app
   
--Abhängigkeiten installieren:
+- Abhängigkeiten installieren:
   flutter pub get faker
   flutter pub get provider
   
--Anwendung starten:
+- Anwendung starten:
   flutter run
