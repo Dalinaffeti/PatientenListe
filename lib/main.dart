@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:patienten_liste/data/mock_data.dart';
 import 'package:patienten_liste/model/patient.dart';
+import 'package:patienten_liste/providers/patient_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PatientProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -51,8 +60,11 @@ const MyHomePage({super.key, required this.title});
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
+  // Controller für die Suchleiste
   late TextEditingController _searchController;
+  // Liste der gefilterten Patienten basierend auf der Suchanfrage
   late List<Patient> _filteredPatients;
   
   @override
@@ -60,9 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _searchController = TextEditingController();
     _filteredPatients = mockPatienten;
+    // Listener hinzufügen, um die Patientenliste bei jeder Änderung der Suchanfrage zu filtern
     _searchController.addListener(_filterPatients);
   }
 
+// Funktion zur Filterung der Patientenliste basierend auf der Suchanfrage
   void _filterPatients() {
     final query = _searchController.text.toLowerCase();
     setState(() {
@@ -96,6 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
+
+            // Suchleiste zur Eingabe der Suchanfrage
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -108,6 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
+
+            // ListView.builder zur Anzeige der gefilterten Patientenliste
             child: ListView.builder(
               itemCount: _filteredPatients.length,
               itemBuilder: (context, index) {
