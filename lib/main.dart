@@ -64,10 +64,12 @@ const MyHomePage({super.key, required this.title});
 class _MyHomePageState extends State<MyHomePage> {
   // Controller für die Suchleiste
   late TextEditingController _searchController;
-  
-  
- 
 
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -90,6 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
             // Suchleiste zur Eingabe der Suchanfrage
             child: TextField(
               controller: _searchController,
+              // Bei jeder Änderung der Suchanfrage wird die searchPatients-Funktion im PatientProvider aufgerufen
+              onChanged: (value) {
+                context.read<PatientProvider>().searchPatients(value);
+              },
               decoration: InputDecoration(
                 hintText: 'Suche nach Name oder ID...',
                 prefixIcon: const Icon(Icons.search),
@@ -100,16 +106,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-
             // ListView.builder zur Anzeige der gefilterten Patientenliste
-            child: ListView.builder(
-              itemCount: _filteredPatients.length,
-              itemBuilder: (context, index) {
-                final patient = _filteredPatients[index];
-                return ListTile(
-                  title: Text('${patient.vorname} ${patient.name}'),
-                  subtitle: Text('ID: ${patient.versichertennummer}'),
-                  trailing: Text(patient.geburtsdatum.toString().split(' ')[0]),
+            child: Consumer<PatientProvider>(
+              builder: (context, provider, _) {
+                return ListView.builder(
+                  itemCount: provider.filteredPatients.length,
+                  itemBuilder: (context, index) {
+                    final patient = provider.filteredPatients[index];
+                    return ListTile(
+                      title: Text('${patient.vorname} ${patient.name}'),
+                      subtitle: Text('ID: ${patient.versichertennummer}'),
+                      trailing: Text(patient.geburtsdatum.toString().split(' ')[0]),
+                    );
+                  },
                 );
               },
             ),
