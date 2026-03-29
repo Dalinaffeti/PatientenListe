@@ -6,26 +6,26 @@ Ziel ist es, eine übersichtliche und durchsuchbare Liste von Patienten bereitzu
 
 
 # Features
-Anzeige von mindestens 100 Patienten (Mockdaten)
+Anzeige von mindestens 100 Patienten (Mockdaten).
 Suchfunktion nach:
   Vorname
   Nachname
   Versicherungsnummer
 
 # Verwendete Technologien
-Flutter (Dart)
-Provider (State Management)
-Faker (Mockdaten-Generierung)
-Visual Studio Code
+Flutter (Dart).
+Provider (State Management).
+Faker (Mockdaten-Generierung).
+Visual Studio Code.
 
 # Architektur
 
 Die Anwendung ist modular aufgebaut:
 
-Models: Datenstruktur (Patient)
-Services: Generierung der Mockdaten
-Provider: State Management und Suchlogik
-Widgets: Wiederverwendbare Komponenten
+Models: Datenstruktur (Patient).
+Services: Generierung der Mockdaten.
+Provider: State Management und Suchlogik.
+Widgets: Wiederverwendbare Komponenten.
 
 # Installation & Start
 Repository klonen:
