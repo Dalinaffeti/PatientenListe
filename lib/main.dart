@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:patienten_liste/data/mock_data.dart';
 import 'package:patienten_liste/model/patient.dart';
 import 'package:patienten_liste/providers/patient_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
+    // Initialisiere den PatientProvider und stelle ihn der gesamten App zur Verfügung
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PatientProvider()),
@@ -64,34 +64,10 @@ const MyHomePage({super.key, required this.title});
 class _MyHomePageState extends State<MyHomePage> {
   // Controller für die Suchleiste
   late TextEditingController _searchController;
-  // Liste der gefilterten Patienten basierend auf der Suchanfrage
-  late List<Patient> _filteredPatients;
   
-  @override
-  void initState() {
-    super.initState();
-    _searchController = TextEditingController();
-    _filteredPatients = mockPatienten;
-    // Listener hinzufügen, um die Patientenliste bei jeder Änderung der Suchanfrage zu filtern
-    _searchController.addListener(_filterPatients);
-  }
+  
+ 
 
-// Funktion zur Filterung der Patientenliste basierend auf der Suchanfrage
-  void _filterPatients() {
-    final query = _searchController.text.toLowerCase();
-    setState(() {
-      if (query.isEmpty) {
-        _filteredPatients = mockPatienten;
-      } else {
-        _filteredPatients = mockPatienten
-            .where((patient) =>
-                patient.vorname.toLowerCase().contains(query) ||
-                patient.name.toLowerCase().contains(query) ||
-                patient.versichertennummer.toLowerCase().contains(query))
-            .toList();
-      }
-    });
-  }
 
   @override
   void dispose() {
