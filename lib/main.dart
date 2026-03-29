@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _searchController.dispose();
     super.dispose();
   }
-
+// Funktion zur Anzeige eines Dialogs, wenn eine Funktion noch nicht implementiert ist
   void _showNotImplementedDialog(String feature, Patient patient) {
     showDialog(
       context: context,
@@ -140,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
+                              // Behandlungskarte aktion
                               _showNotImplementedDialog('Behandlungskarte', patient);
                             },
                             child: const Text('Behandlung'),
@@ -147,7 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           const SizedBox(width: 8),
                           ElevatedButton(
                             onPressed: () {
-                              // Stammdaten action
+                              // Stammdaten aktion
+                              _showNotImplementedDialog('Stammdaten', patient);
                             },
                             child: const Text('Stammdaten'),
                           ),
