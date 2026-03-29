@@ -78,6 +78,24 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  void _showNotImplementedDialog(String feature, Patient patient) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Noch nicht implementiert'),
+        content: Text(
+          '$feature für ${patient.vorname} ${patient.name} ist noch nicht implementiert.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              // Behandlungskarte action
+                              _showNotImplementedDialog('Behandlungskarte', patient);
                             },
                             child: const Text('Behandlung'),
                           ),
