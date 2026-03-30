@@ -11,7 +11,7 @@ class MockPatientService {
         vorname: faker.person.firstName(),
         name: faker.person.lastName(),
         geburtsdatum: _randomBirthDate(),
-        versichertennummer: faker.guid.guid(),
+        versichertennummer: _generateGermanPatientId(),
         geschlecht: faker.randomGenerator.boolean() ? "Male" : "Female",
         letzteBesuch: DateTime.now().subtract(
           Duration(days: faker.randomGenerator.integer(365)),
@@ -27,6 +27,27 @@ class MockPatientService {
     int monat = 1 + faker.randomGenerator.integer(12);
     int tag = 1 + faker.randomGenerator.integer(28);
     return DateTime(jahr, monat, tag);
+  }
+
+// Hilfsfunktion zur Generierung einer deutschen Patienten-ID (KVNR-Format)
+  String _generateGermanPatientId() {
+    final faker = Faker();
+    // Deutsche Krankenversicherungsnummer (KVNR) Format: 10 Ziffern + 1 Buchstabe
+    // Beispiel: A123456789B
+    
+    // Erste Ziffer ist ein Buchstabe (A-Z)
+    String firstChar = String.fromCharCode(65 + faker.randomGenerator.integer(26)); // A-Z
+    
+    // 10 zufällige Ziffern
+    String digits = '';
+    for (int i = 0; i < 10; i++) {
+      digits += faker.randomGenerator.integer(10).toString();
+    }
+    
+    // Letzte Ziffer ist ein Buchstabe (A-Z)
+    String lastChar = String.fromCharCode(65 + faker.randomGenerator.integer(26)); // A-Z
+    
+    return '$firstChar$digits$lastChar';
   }
 }
 
